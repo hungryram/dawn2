@@ -1,0 +1,62 @@
+<div uk-slideshow="animation: push">
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+        <ul class="uk-slideshow-items" uk-height-viewport="offset-bottom: 10">
+            {% for block in section.blocks %}
+            <li>
+                <img srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+                {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+                {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+                {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+                {%- if block.settings.image.width >= 2800 -%}{{ block.settings.image | img_url: '2800x' }} 2800w{%- endif -%}"
+                src="{{ block.settings.image | img_url: '750x' }}"
+                loading="lazy"
+                alt="{{ block.settings.image.alt | escape }}"
+                uk-cover
+                >
+                <div class="uk-position-center uk-position-small uk-text-center uk-light">
+                    <h2 class="uk-margin-remove">{{ block.settings.header }}</h2>
+                    <p class="uk-margin-remove">{{ block.settings.body }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Hero Slideshow",
+    "blocks": [
+        {
+            "name": "Slideshow",
+            "type": "slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "header",
+                    "label": "Header"
+                },
+                {
+                    "type": "text",
+                    "id": "body",
+                    "label": "Body"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name":"Hero"
+        }
+    ]
+}
+{% endschema %}
